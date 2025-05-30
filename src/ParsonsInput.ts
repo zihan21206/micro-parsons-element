@@ -85,6 +85,13 @@ export class ParsonsInput implements IParsonsInput {
         }
     }
 
+    public getBlockIndices = (): number[] => {
+        const blocks = this._dropArea.querySelectorAll('.parsons-block');
+        return Array.from(blocks).map(block =>
+            parseInt((block as HTMLDivElement).dataset.index || "-1")
+        );
+    }
+
     // getting the code from one block, and ignore tooltip text
     private _getTextFromBlock = (block: HTMLDivElement): string => {
         if (this.parentElement.language == 'raw') {
@@ -143,6 +150,7 @@ export class ParsonsInput implements IParsonsInput {
         // add new blocks
         for (let i = 0; i < this.blockOrder.length; ++i) {
             const newBlock = document.createElement('div');
+            newBlock.dataset.index = this.blockOrder[i].toString();
             this._dragArea.appendChild(newBlock);
             if (this.storedSourceBlocks[this.blockOrder[i]] === ' ') {
                 newBlock.innerHTML = '&nbsp;';
