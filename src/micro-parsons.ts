@@ -120,6 +120,10 @@ export class MicroParsonsElement extends HTMLElement {
         return (this.hparsonsInput as ParsonsInput)._getTextArray();
     }
 
+    public getBlockIndices(): number[] {
+        return (this.hparsonsInput as ParsonsInput).getBlockIndices();
+    }
+
     public setCodeContext(props: {before: string | null, after: string | null}) {
         if (props.before) {
             this.codeBefore = props.before;
